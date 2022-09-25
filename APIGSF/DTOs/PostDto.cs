@@ -1,9 +1,10 @@
 ﻿using System;
-namespace APIGSF.Entities
+using APIGSF.Entities;
+
+namespace APIGSF.DTOs
 {
-    public class Post
+    public class PostDto
     {
-        public int Id { get; set; }
         public string Caption { get; set; }
         public bool Liked { get; set; }
         public bool Saved { get; set; }
