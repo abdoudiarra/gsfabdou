@@ -29,7 +29,7 @@ namespace APIGSF.Controllers
             
             var user = new AppUser
             {
-                FirstName = registerDto.FirsName,
+                FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 UserName = registerDto.UserName.ToLower(),
