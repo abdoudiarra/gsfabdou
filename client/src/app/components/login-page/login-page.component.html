@@ -1,0 +1,46 @@
+<div class="gradientLogin min-h-screen">
+  <div class="logo">
+    <img src="../assets/images/gsflogo.png" alt="gsflogo">
+  </div>
+
+
+  <div class="container mx-auto max-w-lg polka p-11 rounded grid place-items-center marginCustom">
+    <form #loginForm="ngForm"  (ngSubmit)="login()">
+      <h1 class="font-bold text-xl text-center">Bienvenue chez GSF</h1>
+      <p class="text-xs text-center text-gray-500">Connectez-vous à votre compte</p>
+      <div class="mt-10">
+
+        <!-- Username -->
+        <input
+          name="username"
+          type="text"
+          [(ngModel)]="model.username"
+          placeholder="Username"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 px-11"
+        >
+      </div>
+
+      <div class="mt-5">
+        <!-- Password -->
+        <input
+          name="password"
+          type="password"
+          [(ngModel)]="model.Password"
+          placeholder="Password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 px-11"
+        >
+      </div>
+
+      <div class="text-center mt-6">
+        <button type="submit" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-9 py-2 rounded">
+          Se connecter
+        </button>
+      </div>
+    </form>
+
+    <div>
+    </div>
+  </div>
+  <p class="text-center mt-5"><a href="" routerLink="/register" class="text-center">Pas encore de compte? Inscrivez-vous</a></p>
+
+</div>
