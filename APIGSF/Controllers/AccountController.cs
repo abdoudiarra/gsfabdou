@@ -33,18 +33,14 @@ namespace APIGSF.Controllers
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 UserName = registerDto.UserName.ToLower(),
-                Password = registerDto.Password,
-                Followers = null,
-                Following = null,
-                Posts = null,
-                Saved = null,
-                Notifications = null
-
+                Password = registerDto.Password
             };
 
             _context.Users.Add(user);
 
             await _context.SaveChangesAsync();
+
+            //object mapper
 
             return new AppUserDto
             {
@@ -52,12 +48,7 @@ namespace APIGSF.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 Username = user.UserName,
-                Password = user.Password,
-                Followers = null,
-                Following = null,
-                Posts = null,
-                Saved = null,
-                Notifications = null
+                Password = user.Password
             };
         }
 

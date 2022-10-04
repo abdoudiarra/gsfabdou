@@ -21,10 +21,12 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Data\" />
     <None Remove="DTOs\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Data\" />
     <Folder Include="DTOs\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

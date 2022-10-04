@@ -6,7 +6,6 @@ namespace APIGSF.Entities
        
         public int Id { get; set; }
         public string CommentString { get; set; }
-        
     }
 }
 

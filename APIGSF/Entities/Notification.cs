@@ -5,7 +5,6 @@ namespace APIGSF.Entities
     {
         public int Id { get; set; }
         public string NotificationString { get; set; }
-
     }
 }
 
