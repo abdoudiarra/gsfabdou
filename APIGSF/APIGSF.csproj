@@ -13,6 +13,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+    <PackageReference Include="NuGet.Repositories" Version="4.2.0" />
+    <PackageReference Include="Abp.ZeroCore" Version="7.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +24,10 @@
     <None Remove="Data\" />
     <None Remove="DTOs\" />
     <None Remove="Extensions\" />
+    <None Remove="AbpDomainEntityBases" />
+    <None Remove="Abp.ZeroCore" />
+    <None Remove="NuGet.Repositories" />
+    <None Remove="Mystik.Yggdrasil.MemoryRepository" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />

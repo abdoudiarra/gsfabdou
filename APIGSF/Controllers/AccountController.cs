@@ -33,7 +33,10 @@ namespace APIGSF.Controllers
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 UserName = registerDto.UserName.ToLower(),
-                Password = registerDto.Password
+                Password = registerDto.Password,
+                
+
+                
             };
 
             _context.Users.Add(user);
@@ -85,8 +88,6 @@ namespace APIGSF.Controllers
         {
             throw new NotImplementedException();
         }
-
-      
     }
 }
 

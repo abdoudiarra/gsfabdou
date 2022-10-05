@@ -1,7 +1,7 @@
 ﻿using System;
 namespace APIGSF.Entities
 {
-    public class Comments
+    public class Comments 
     {
        
         public int Id { get; set; }

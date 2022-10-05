@@ -3,6 +3,7 @@ using System;
 using APIGSF.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIGSF.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221005170722_Reset_Migrations")]
+    partial class Reset_Migrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -58,12 +60,12 @@ namespace APIGSF.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PostsId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostsId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -83,10 +85,13 @@ namespace APIGSF.Data.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("APIGSF.Entities.Posts", b =>
+            modelBuilder.Entity("APIGSF.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Caption")
@@ -101,47 +106,17 @@ namespace APIGSF.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("AppUserPosts", b =>
-                {
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PostsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AppUserId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("AppUserPosts");
+                    b.ToTable("UserPosts");
                 });
 
             modelBuilder.Entity("APIGSF.Entities.Comments", b =>
                 {
-                    b.HasOne("APIGSF.Entities.Posts", null)
+                    b.HasOne("APIGSF.Entities.Post", null)
                         .WithMany("Comments")
-                        .HasForeignKey("PostsId");
+                        .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("AppUserPosts", b =>
-                {
-                    b.HasOne("APIGSF.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("APIGSF.Entities.Posts", null)
-                        .WithMany()
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("APIGSF.Entities.Posts", b =>
+            modelBuilder.Entity("APIGSF.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
                 });

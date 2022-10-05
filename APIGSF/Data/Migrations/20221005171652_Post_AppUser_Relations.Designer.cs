@@ -3,6 +3,7 @@ using System;
 using APIGSF.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIGSF.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221005171652_Post_AppUser_Relations")]
+    partial class Post_AppUser_Relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -58,12 +60,12 @@ namespace APIGSF.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PostsId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostsId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -74,19 +76,54 @@ namespace APIGSF.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("NotificationString")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("APIGSF.Entities.Posts", b =>
+            modelBuilder.Entity("APIGSF.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("APIGSF.Entities.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Caption")
@@ -101,47 +138,83 @@ namespace APIGSF.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("AppUserPosts", b =>
-                {
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PostsId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AppUserId", "PostsId");
-
-                    b.HasIndex("PostsId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("AppUserPosts");
                 });
 
-            modelBuilder.Entity("APIGSF.Entities.Comments", b =>
+            modelBuilder.Entity("AppUserAppUser", b =>
                 {
-                    b.HasOne("APIGSF.Entities.Posts", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("PostsId");
+                    b.Property<int>("FollowersId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("FollowingId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("FollowersId", "FollowingId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.ToTable("AppUserAppUser");
                 });
 
-            modelBuilder.Entity("AppUserPosts", b =>
+            modelBuilder.Entity("APIGSF.Entities.Comments", b =>
+                {
+                    b.HasOne("APIGSF.Entities.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("APIGSF.Entities.Notification", b =>
                 {
                     b.HasOne("APIGSF.Entities.AppUser", null)
-                        .WithMany()
+                        .WithMany("Notifications")
+                        .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("APIGSF.Entities.Photo", b =>
+                {
+                    b.HasOne("APIGSF.Entities.AppUser", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("APIGSF.Entities.Post", b =>
+                {
+                    b.HasOne("APIGSF.Entities.AppUser", "AppUser")
+                        .WithMany("Posts")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("APIGSF.Entities.Posts", null)
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("AppUserAppUser", b =>
+                {
+                    b.HasOne("APIGSF.Entities.AppUser", null)
                         .WithMany()
-                        .HasForeignKey("PostsId")
+                        .HasForeignKey("FollowersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("APIGSF.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("APIGSF.Entities.Posts", b =>
+            modelBuilder.Entity("APIGSF.Entities.AppUser", b =>
+                {
+                    b.Navigation("Notifications");
+
+                    b.Navigation("Photos");
+
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("APIGSF.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
                 });
