@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using API.Controllers;
 using APIGSF.Data;
 using APIGSF.DTOs;
@@ -25,7 +26,7 @@ namespace APIGSF.Controllers
             if (userId == null)
                 throw new NotImplementedException("error"); var post = new Posts
             {
-               
+                AppUserId = userId,
                 Caption = postDto.Caption,
                 Liked = postDto.Liked,
                 Saved = postDto.Saved,
@@ -44,21 +45,29 @@ namespace APIGSF.Controllers
                 Liked = post.Liked,
                 Saved = post.Saved,
                 Comments = post.Comments,
+                AppUserId = userId
                 
             };
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task DeletePost(int id)
+        [HttpDelete("delete/{postId}/{userId}")]
+        public async Task DeletePost(int postId, int userId)
         {
-            var post = _context.Posts.SingleOrDefault(x => x.Id == id);
+            var post = _context.Posts.SingleOrDefault(x => x.Id == postId);
 
             if (post != null)
             {
-                _context.Posts.Remove(post);
-
+                var comments = _context.Comments.Where(x => x.PostsId == postId).ToList();
+                if(comments != null)
+                {
+                    for(int i = 0; i < comments.Count(); i++)
+                    {
+                        _context.Comments.Remove(comments[i]);
+                    }
+                    _context.Posts.Remove(post);
+                }
+               
             }
-            
 
             await _context.SaveChangesAsync();
 
@@ -69,7 +78,7 @@ namespace APIGSF.Controllers
         {
             var user = _context.Users.SingleOrDefault(x => x.Id == id);
            
-            var posts = _context.Posts.Where(x => x.Id == user.Id).ToListAsync();
+            var posts = _context.Posts.Where(x => x.AppUserId == user.Id).ToListAsync();
             
             return await posts;
         }
