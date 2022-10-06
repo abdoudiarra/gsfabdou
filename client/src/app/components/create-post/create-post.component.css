@@ -1,0 +1,51 @@
+.logo{
+  height: 50px;
+  width : 100px
+}
+
+.polka{
+  background-color: white;
+  opacity: 0.9;
+  background-image: radial-gradient(#444cf7 1.25px, white 1.25px);
+  background-size: 25px 25px;
+}
+
+.gradientLogin{
+  background: #525252;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #3d72b4, #525252);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #3d72b4, #525252); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.marginCustom{
+  margin-top : 10rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 4px;
+}
+
+a {
+  background:
+    linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+  );
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+a:hover {
+  background-size: 0 3px, 100% 3px;
+}
+

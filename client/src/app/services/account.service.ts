@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Posts } from '../models/posts';
 import { User } from '../models/user';
 
 
@@ -21,7 +22,9 @@ export class AccountService {
   login(model : any){
     return this.http.post(this.baseUrl + "Account/login",model).pipe(map((response:any) => {
       const user = response
+
       if(user){
+        user.id++;
         localStorage.setItem('user',JSON.stringify(user));
       }
     }))
@@ -37,9 +40,19 @@ export class AccountService {
     }))
   }
 
-
-
   logout(){
     localStorage.removeItem("user")
+  }
+
+  publishPost(model : any){
+    return this.http.post<Posts>(this.baseUrl + "Post/PublishPost",model).pipe(
+      map((post : Posts) => {
+        if(post){
+          localStorage.setItem("post", JSON.stringify(post));
+
+        }
+      }
+    )
+    )
   }
 }

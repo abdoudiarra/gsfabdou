@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { User } from "../../models/user";
+import 'flowbite';
+
 
 @Component({
   selector: 'app-profile-section',
@@ -9,6 +11,7 @@ import { User } from "../../models/user";
 })
 export class ProfileSectionComponent implements OnInit {
   // user : User | undefined;
+  showDialog = false;
   userFollowers : number = 0;
   userFollowing : number = 0;
   userPostsNumber : number = 0;
@@ -18,15 +21,25 @@ export class ProfileSectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("in");
     this.getUser();
   }
   getUser(){
+    console.log(this.user);
     if(this.user != undefined){
       let userInfos = JSON.parse(this.user);
       this.userName = userInfos.username;
-      this.userFollowers = userInfos.followers.length();
-      this.userFollowing = userInfos.following.length();
-      this.userPostsNumber = userInfos.posts.length();
+      this.userFollowers = 0 ;
+      this.userFollowing = 0;
+      this.userPostsNumber = 0;
     }
+  }
+
+  showDialogModal(){
+    if(this.showDialog == true){
+      this.showDialog = false;
+    }
+    this.showDialog = true;
+
   }
 }

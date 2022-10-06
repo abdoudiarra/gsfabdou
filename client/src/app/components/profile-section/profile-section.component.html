@@ -17,4 +17,13 @@
       <p>Abonnes</p>
     </div>
   </div>
+
+
 </div>
+<div class="flex space-x-2 justify-center">
+  <button
+  (click)="showDialogModal()"
+  type="button"
+  class="inline-block mt-3 px-6 py-2.5 bg-blue-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Post Something !</button>
+</div>
+<app-create-post *ngIf="showDialog == true"></app-create-post>

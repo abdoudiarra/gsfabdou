@@ -10,7 +10,7 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 export class HomePageComponent implements OnInit {
   user = localStorage.getItem("user");
   userInfos :string ="";
-  
+
   constructor() { }
 
   ngOnInit(): void {

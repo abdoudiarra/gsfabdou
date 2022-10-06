@@ -1,0 +1,42 @@
+<div class="container mx-auto max-w-lg  bg-white p-11 rounded grid place-items-center marginCustom">
+
+  <form #publishPostForm="ngForm"  (ngSubmit)="publishPost()" >
+    <h1 class="font-bold text-xl text-center">Post Something !</h1>
+    <div class="mt-10">
+
+      <!-- Caption -->
+      <input
+        name="caption"
+        type="text"
+        [(ngModel)]="model.caption"
+        placeholder="Caption"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 px-11"
+      >
+    </div>
+
+    <div class="mt-5">
+      <!-- Password -->
+      <input
+        name="image"
+        type="text"
+        placeholder="image"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 px-11"
+      >
+    </div>
+
+    <div class="text-center mt-6">
+      <button
+      type="button" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-9 py-2 mx-2 rounded">
+        Annuler
+      </button>
+      <button type="submit" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-9 py-2 mx-2 rounded">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+
+  <div>
+  </div>
+</div>
+
+

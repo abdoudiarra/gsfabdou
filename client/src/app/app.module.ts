@@ -12,6 +12,9 @@ import { ConversationSectionComponent } from './components/conversation-section/
 import { ProfileSectionComponent } from './components/profile-section/profile-section.component';
 import { SavedSectionComponent } from './components/saved-section/saved-section.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+
 
 
 @NgModule({
@@ -23,13 +26,15 @@ import { HttpClientModule } from '@angular/common/http';
     NotificationsSectionComponent,
     ConversationSectionComponent,
     ProfileSectionComponent,
-    SavedSectionComponent
+    SavedSectionComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
